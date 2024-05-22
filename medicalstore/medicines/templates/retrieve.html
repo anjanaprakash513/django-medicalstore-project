@@ -1,0 +1,68 @@
+{% extends 'layout/app-layout.html' %}
+{% block 'content' %}
+<!-- <div class="container mt-5 mb-3"> 
+  <form method="GET" action="">
+    <input type="text" name="search" placeholder="Search" style="border-radius: 20px; height: 35px;">
+    <button type="submit" class="btn btn-warning btn-sm" style="border-radius: 20px;">Search</button>
+</form>
+</div> -->
+
+<div class="container mb-4 mt-5">
+  <a href="{% url 'createproduct' %}" class="btn btn-warning" value="edit" type="submit">Add medicine</a>
+</div>
+
+<div class="container">
+  <table class="table table-striped">
+    <tr>
+      <th>Id</th>
+      <th>Name of drug</th>
+      <th>Form</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    {% for medics in medicine_list %}
+      <tr>
+        <td>{{ medics.id }}</td>
+        <td>{{ medics.Name }}</td>
+        <td>{{ medics.Form }}</td>
+        <td>{{ medics.Category }}</td>
+        <td>{{ medics.Price }}</td>
+        <td>
+          <a href="{% url 'edit' medics.id %}" class="btn btn-success" value="edit" type="submit">Edit</a>
+        </td>
+        <td>
+          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ medics.id }}">Delete</button>
+          <!-- Modal -->
+          <div class="modal fade" id="deleteModal{{ medics.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to delete {{ medics.Name }}?
+                </div>
+                
+                <div class="modal-footer">
+                    <form method="post" action="{% url 'delete' medics.id  %}">
+                        {% csrf_token %}
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ medics.id }}">Delete</button>
+                    </form>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
+
+

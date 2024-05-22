@@ -1,0 +1,32 @@
+{% extends 'layout/app-layout.html' %}
+{% block 'content' %}
+<div class="container bg-white col-md-4 col-sm-12 w-50 mt-5 p-4">
+  <h1 class="mb-4">Add Medicine</h1>
+  <form action='' method='post'>
+
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label class="col-md-4 col-form-label">Medicine Name:</label>
+      {{ form.Name }}
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 col-form-label">Form:</label>
+      {{ form.Form }}
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 col-form-label">Category:</label>
+      {{ form.Category }}
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 col-form-label">Price:</label>
+      {{ form.Price }}
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block mt-3 w-50">Submit</button>
+  </form>
+</div>
+{% endblock %}

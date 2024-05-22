@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MEDSTORE</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav">
+          <li>
+            <form method="GET" action="" style="display: flex; align-items: center;">
+              <input type="text" name="search" placeholder="Search" style="height: 35px; flex: 1; margin-right: 5px; margin-left: 65px;">
+              <button type="submit" class="btn btn-secondary btn-sm" style="height: 35px;">Search</button>
+          </form>
+          
+          </li>
+      </ul>
+      {% endif %}
+      
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+
+        {% if user.is_authenticated %}
+      <li class="nav-item me-2">
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="logout " style="border: none; background-color: transparent;color: white;">Logout</button>
+      </form>
+      {% endif %}
+        </li>
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
